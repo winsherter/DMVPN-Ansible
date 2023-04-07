@@ -1,0 +1,4 @@
+---
+- name: deploy hub specific configuration
+  ios_config:
+    src: hubs.j2

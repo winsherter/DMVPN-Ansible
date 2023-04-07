@@ -1,0 +1,12 @@
+interface Tunnel10
+ ip nhrp map 10.0.0.100 209.165.201.10
+ ip nhrp map multicast 209.165.201.10
+ ip nhrp shortcut
+ ip nhrp nhs 10.0.0.100
+
+router eigrp 1
+ network 10.0.0.0 0.0.0.255
+ network {{ interfaces.Loopback0.address }} 0.0.0.0
+ eigrp router-id  {{ interfaces.Loopback0.address }}
+ no auto-summary
+ do wr

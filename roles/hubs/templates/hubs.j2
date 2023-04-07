@@ -1,0 +1,19 @@
+{% if nhrp is defined %}
+interface Tunnel10
+ ip nhrp map {{ nhrp.map }}
+ ip nhrp map multicast {{ nhrp.multicast }}
+ ip nhrp nhs {{ nhrp.nhs }}
+{% endif %}
+
+interface Tunnel10
+ ip nhrp map multicast dynamic
+ no ip next-hop-self eigrp 1
+ no ip split-horizon eigrp 1
+ ip nhrp shortcut
+ 
+router eigrp 1
+ network 10.0.0.0 0.0.0.255
+ network {{ interfaces.Loopback0.address }} 0.0.0.0
+ eigrp router-id  {{ interfaces.Loopback0.address }}
+ no auto-summary
+ do wr

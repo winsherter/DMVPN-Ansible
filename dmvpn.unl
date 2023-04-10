@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<lab name="dmvpn" version="1" scripttimeout="300" lock="0">
+  <topology>
+    <nodes>
+      <node id="1" name="HUB" type="dynamips" template="c7200" image="c7200-adventerprisek9-mz.152-4.S6.image" idlepc="0x62f21000" nvram="128" ram="256" console="" delay="0" icon="Router.png" config="0" left="69" top="369">
+        <slot id="1" module="PA-8E"/>
+        <interface id="0" name="fa0/0" type="ethernet" network_id="5"/>
+        <interface id="17" name="e1/1" type="ethernet" network_id="1"/>
+      </node>
+      <node id="2" name="INTERNET" type="dynamips" template="c7200" image="c7200-adventerprisek9-mz.152-4.S6.image" idlepc="0x62f21000" nvram="128" ram="256" console="" delay="0" icon="Router.png" config="0" left="663" top="321">
+        <slot id="1" module="PA-8E"/>
+        <interface id="17" name="e1/1" type="ethernet" network_id="1"/>
+        <interface id="18" name="e1/2" type="ethernet" network_id="2"/>
+        <interface id="19" name="e1/3" type="ethernet" network_id="3"/>
+        <interface id="20" name="e1/4" type="ethernet" network_id="4"/>
+      </node>
+      <node id="3" name="SPOKE1" type="dynamips" template="c7200" image="c7200-adventerprisek9-mz.152-4.S6.image" idlepc="0x62f21000" nvram="128" ram="256" console="" delay="0" icon="Router.png" config="0" left="1269" top="21">
+        <slot id="1" module="PA-8E"/>
+        <interface id="0" name="fa0/0" type="ethernet" network_id="5"/>
+        <interface id="17" name="e1/1" type="ethernet" network_id="2"/>
+      </node>
+      <node id="4" name="SPOKE3" type="dynamips" template="c7200" image="c7200-adventerprisek9-mz.152-4.S6.image" idlepc="0x62f21000" nvram="128" ram="256" console="" delay="0" icon="Router.png" config="0" left="1319" top="771">
+        <slot id="1" module="PA-8E"/>
+        <interface id="0" name="fa0/0" type="ethernet" network_id="5"/>
+        <interface id="17" name="e1/1" type="ethernet" network_id="4"/>
+      </node>
+      <node id="5" name="SPOKE2" type="dynamips" template="c7200" image="c7200-adventerprisek9-mz.152-4.S6.image" idlepc="0x62f21000" nvram="128" ram="256" console="" delay="0" icon="Router.png" config="0" left="1269" top="371">
+        <slot id="1" module="PA-8E"/>
+        <interface id="0" name="fa0/0" type="ethernet" network_id="5"/>
+        <interface id="17" name="e1/1" type="ethernet" network_id="3"/>
+      </node>
+    </nodes>
+    <networks>
+      <network id="1" type="bridge" name="Net-HUBiface_17" left="138" top="388" visibility="0"/>
+      <network id="2" type="bridge" name="Net-SPOKE1iface_17" left="969" top="58" visibility="0"/>
+      <network id="3" type="bridge" name="Net-SPOKE2iface_17" left="957" top="397" visibility="0"/>
+      <network id="4" type="bridge" name="Net-SPOKE3iface_17" left="963" top="742" visibility="0"/>
+      <network id="5" type="pnet0" name="Net" left="705" top="729" visibility="1"/>
+    </networks>
+  </topology>
+</lab>

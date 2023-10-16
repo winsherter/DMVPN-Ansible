@@ -5,15 +5,23 @@ interface Tunnel10
  ip nhrp nhs {{ nhrp.nhs }}
 {% endif %}
 
-interface Tunnel10
- ip nhrp map multicast dynamic
- no ip next-hop-self eigrp 1
- no ip split-horizon eigrp 1
- ip nhrp shortcut
- 
-router eigrp 1
+crypto ipsec security-association replay window-size 512
+
+ip route vrf INET-PUBLIC 0.0.0.0 0.0.0.0 172.18.232.2
+
+router eigrp WAN-DMVPN
+ address-family ipv4 unicast autonomous-system 10	
+  af-interface default
+   passive-interface
+ exit-af-interface
+ af-interface Tunnel10
+  hello-interval 20
+  hold-time 60
+  no passive-interface
+  no split-horizon
+ exit-af-interface
  network 10.0.0.0 0.0.0.255
  network {{ interfaces.Loopback0.address }} 0.0.0.0
- eigrp router-id  {{ interfaces.Loopback0.address }}
- no auto-summary
- do wr
+ eigrp router-id  {{ interfaces.Loopback0.address }} 
+exit-address-family
+do wr

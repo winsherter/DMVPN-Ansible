@@ -7,11 +7,16 @@ interface Tunnel10
  no ip redirects
  ip mtu 1400
  ip tcp adjust-mss 1360
- tunnel source Ethernet1/1
+ tunnel source FastEthernet0/0
  tunnel mode gre multipoint
- ip nhrp authentication cisco123
+ tunnel vrf INET-PUBLIC
+ tunnel protection ipsec profile DMVPN-PROFILE
+ ip nhrp authentication suzkEshibze3moffov
+ ip nhrp map multicast dynamic
  ip nhrp network-id 101
- tunnel key 6783
  ip nhrp holdtime 600
  ip nhrp redirect
+
+interface FastEthernet0/0
+ ip access-group ACL-INET-PUBLIC in
  do wr

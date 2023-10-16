@@ -1,17 +1,12 @@
 ---
-
 interfaces:
-  Loopback0: 
+  Loopback0:
     address: 192.168.123.102
 
   Tunnel10:
-    address: 10.0.0.102
+    address: 10.0.0.104
     mask: 255.255.255.0
 
   FastEthernet0/0:
-    address: 192.168.0.102
+    address: 172.18.232.102
     mask: 255.255.255.0
-
-  Ethernet1/1:
-    address: 209.165.203.34
-    mask: 255.255.255.252

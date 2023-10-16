@@ -1,14 +1,19 @@
 [all:vars]
 #SSH connection
-ansible_connection= network_cli
+ansible_connection=network_cli
 ansible_network_os=ios
 ansible_user=ansible
 ansible_ssh_pass=ansible
 
+#Tunnel PSK
+pre_shared_key=suzkEshibze3moffov
+
 [hubs]
-hub ansible_host=192.168.0.100
+hub1 ansible_host=172.18.232.201
+hub2 ansible_host=172.18.232.202
 
 [spokes]
-spoke1 ansible_host=192.168.0.101
-spoke2 ansible_host=192.168.0.102
-spoke3 ansible_host=192.168.0.103
+spoke1 ansible_host=172.18.232.101
+spoke2 ansible_host=172.18.232.102
+spoke3 ansible_host=172.18.232.103
+spoke4 ansible_host=172.18.232.104

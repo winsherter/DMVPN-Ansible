@@ -1,12 +1,29 @@
 interface Tunnel10
- ip nhrp map 10.0.0.100 209.165.201.10
- ip nhrp map multicast 209.165.201.10
+ ip nhrp map 10.0.0.101 172.18.232.201
+ ip nhrp map multicast 172.18.232.201
+ ip nhrp map 10.0.0.102 172.18.232.202
+ ip nhrp map multicast 172.18.232.202
+ ip nhrp registration no-unique
  ip nhrp shortcut
- ip nhrp nhs 10.0.0.100
+ ip nhrp nhs 10.0.0.101 priority 1 cluster 1
+ ip nhrp nhs 10.0.0.102 priority 2 cluster 1
 
-router eigrp 1
+crypto ipsec security-association replay window-size 1024
+
+ip route vrf INET-PUBLIC 0.0.0.0 0.0.0.0 172.18.232.2
+
+router eigrp WAN-DMVPN
+ address-family ipv4 unicast autonomous-system 10
+  af-interface default
+   passive-interface
+ exit-af-interface
+ af-interface Tunnel10
+  hello-interval 20
+  hold-time 60
+  no passive-interface
+ exit-af-interface
  network 10.0.0.0 0.0.0.255
  network {{ interfaces.Loopback0.address }} 0.0.0.0
  eigrp router-id  {{ interfaces.Loopback0.address }}
- no auto-summary
- do wr
+exit-address-family
+do wr
